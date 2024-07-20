@@ -36,7 +36,7 @@ export default function Home() {
         </div>
 
         <div className="grid grid-cols-[60%_40%] text-[48px] max-w-[1200px] mx-auto items-center">
-          <div className="flex-col gap-2 flex">
+          <div className="flex-col gap-4 flex">
             <h1 className="font-light leading-[120%] flex-wrap w-full flex gap-x-4">
               <span className="hover:drop-shadow-glow drop-shadow-none duration-200 cursor-default">Book</span> 
               <span className="hover:drop-shadow-glow drop-shadow-none duration-200 cursor-default">tickets</span> 
@@ -49,7 +49,7 @@ export default function Home() {
             </h1>
             <p className="font-extralight w-[80%] text-[16px]">
               Bla bla bla subtext. Bla bla bla subtext. Bla bla bla subtext. Bla
-              bla bla subtext. Bla bla bla subtext.{" "}
+              bla bla subtext. Bla bla bla subtext.
             </p>
           </div>
           <div className="border-[1px] border-[#fffa] mx-auto rounded-full flex justify-center w-[256px] h-[256px] items-center group cursor-pointer hover:border-[#ffff] duration-200">

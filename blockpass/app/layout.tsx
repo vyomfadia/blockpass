@@ -19,7 +19,13 @@ export default function RootLayout({children}: Readonly<{ children: React.ReactN
         <AuthSessionWrapper>
             <PolkadotExtensionContextProvider>
                 <html lang="en">
-                <body className={`${inter.className} h-screen w-screen`}>{children}</body>
+                    <body className={`${inter.className} h-[100svh] relative`}>
+                        <div className="absolute gradient h-full w-full">
+                        </div>
+                        <div className="h-full relative">
+                            {children}
+                        </div>
+                    </body>
                 </html>
             </PolkadotExtensionContextProvider>
         </AuthSessionWrapper>
