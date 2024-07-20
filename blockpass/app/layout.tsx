@@ -25,7 +25,20 @@ export default function RootLayout({children}: Readonly<{ children: React.ReactN
                         <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:ital,opsz,wght@0,6..12,200..1000;1,6..12,200..1000&display=swap" rel="stylesheet"/>
                     </head>
                     <body className={`${inter.className} h-[100svh] relative`}>
-                        <div className="gradient h-full w-full fixed">
+                        <div className="absolute overlay h-full w-full"> 
+                        <svg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'>
+                                <filter id='noiseFilter'>
+                                    <feTurbulence 
+                                    type='fractalNoise' 
+                                    baseFrequency='9.11' 
+                                    numOctaves='6' 
+                                    stitchTiles='stitch'/>
+                                </filter>
+                                
+                                <rect width='100%' height='100%' filter='url(#noiseFilter)'/>
+                            </svg>
+                        </div>
+                        <div className="absolute gradient h-full w-full">
                         </div>
                         <div className="h-full relative">
                             {children}

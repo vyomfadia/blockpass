@@ -30,13 +30,21 @@
 
 .gradient{
   z-index: -1;
-  background: radial-gradient(100% 100% at 130% -30%, #6888CB, transparent), radial-gradient(50% 100% at 0 100%, #851360, transparent);
+  filter: contrast(170%) brightness(100%);
+  background: radial-gradient(80% 120% at 140% -50%, #6888CB, transparent), radial-gradient(50% 100% at 0 100%, #851360, transparent);
 }
+
+.overlay{
+  filter: grayscale(1) invert(1) opacity(50%);
+  mix-blend-mode: screen;
+}
+
+
 
 body {
   @apply bg-[#000] overflow-x-hidden;
-  color: rgb(var(--foreground-rgb));
   @apply font-nunito;
+  color: rgb(var(--foreground-rgb));
 }
 
 @layer utilities {
