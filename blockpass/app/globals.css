@@ -3,6 +3,16 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Hide scrollbar for Chrome, Safari and Opera */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+/* Hide scrollbar for IE, Edge and Firefox */
+.no-scrollbar {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+}
 
 :root {
   --foreground-rgb: 251, 246, 226;
@@ -19,8 +29,8 @@
 } */
 
 body {
+  @apply bg-gradient-to-b from-[#0d213a] to-[#000];
   color: rgb(var(--foreground-rgb));
-  background: rgb(var(--background-rgb));
 }
 
 @layer utilities {
