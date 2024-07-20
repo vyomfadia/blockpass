@@ -1,10 +1,9 @@
-import Image from "next/image";
-import AccountSelector from "@/components/AccountSelector";
+import LoginButton from "@/components/LoginButton";
 
 export default function Home() {
   return (
     <>
-    <AccountSelector />
+    <LoginButton />
     </>
   );
 }
