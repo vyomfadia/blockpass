@@ -3,8 +3,8 @@
 import {useRouter} from "next/navigation";
 import {useState} from "react";
 import {useSession, signIn, signOut, getCsrfToken} from 'next-auth/react';
-import AccountSelector from "@/components/AccountSelector";
-import {usePolkadotExtensionWithContext} from "@/context/PolkadotExtensionContext";
+import AccountSelector from "@/app/(components)/AccountSelector";
+import {usePolkadotExtensionWithContext} from "@/app/(context)/PolkadotExtensionContext";
 import {sign} from "node:crypto";
 
 export default function LoginButton() {

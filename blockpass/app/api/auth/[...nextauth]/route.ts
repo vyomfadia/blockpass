@@ -1,8 +1,7 @@
 import NextAuth, {User} from "next-auth"
 import CredentialsProvider from 'next-auth/providers/credentials';
 import {cryptoWaitReady, signatureVerify} from '@polkadot/util-crypto';
-import {encodeAddress, decodeAddress} from '@polkadot/keyring';
-import {u8aToHex} from '@polkadot/util';
+import {encodeAddress} from '@polkadot/keyring';
 import {ApiPromise, WsProvider} from '@polkadot/api';
 import {BN} from '@polkadot/util';
 

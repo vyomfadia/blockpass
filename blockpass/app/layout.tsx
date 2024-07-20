@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
 import { Inter, Josefin_Sans } from "next/font/google";
 import "./globals.css";
-import AuthSessionWrapper from "@/context/AuthSessionProvider";
-import { PolkadotExtensionContextProvider } from "@/context/PolkadotExtensionContext";
+import AuthSessionWrapper from "@/app/(context)/AuthSessionProvider";
+import { PolkadotExtensionContextProvider } from "@/app/(context)/PolkadotExtensionContext";
 
 const inter = Inter({
   subsets: ["latin"],

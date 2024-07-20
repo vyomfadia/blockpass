@@ -4,7 +4,7 @@ import { createContext, ReactNode, useContext } from 'react';
 import {
     usePolkadotExtension,
     UsePolkadotExtensionReturnType,
-} from '@/hooks/UsePolkdadotExtension';
+} from '@/app/(hooks)/UsePolkdadotExtension';
 
 const PolkadotExtensionContext = createContext<UsePolkadotExtensionReturnType>({
     accounts: [],

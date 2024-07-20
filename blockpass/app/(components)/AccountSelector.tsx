@@ -1,6 +1,6 @@
 "use client";
 
-import {usePolkadotExtensionWithContext} from '@/context/PolkadotExtensionContext';
+import {usePolkadotExtensionWithContext} from '@/app/(context)/PolkadotExtensionContext';
 
 export default function AccountSelector() {
     const {accounts, actingAccount, setActingAccountIdx} = usePolkadotExtensionWithContext();
