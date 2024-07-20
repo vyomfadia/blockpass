@@ -19,7 +19,7 @@ export default function RootLayout({children}: Readonly<{ children: React.ReactN
         <AuthSessionWrapper>
             <PolkadotExtensionContextProvider>
                 <html lang="en">
-                <body className={inter.className}>{children}</body>
+                <body className={`${inter.className} h-screen w-screen`}>{children}</body>
                 </html>
             </PolkadotExtensionContextProvider>
         </AuthSessionWrapper>

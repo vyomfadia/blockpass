@@ -16,6 +16,7 @@ export default function AccountSelector() {
                 setActingAccountIdx(accountIdx);
             }}
             value={actingAccount?.address}
+            className={"w-full text-sm border border-gray-300 rounded-lg p-2"}
         >
             {accounts?.map((acc) => (
                 <option key={acc.address} value={acc.address}>
