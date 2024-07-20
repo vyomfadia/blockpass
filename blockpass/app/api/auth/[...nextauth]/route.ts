@@ -72,7 +72,7 @@ const handler = NextAuth({
                             return Promise.reject(new Error('invalid signature'));
                         }
 
-                        const wsProvider = new WsProvider('wss://rpc.polkadot.io');
+                        const wsProvider = new WsProvider('wss://westend-rpc.polkadot.io');
                         const api = await ApiPromise.create({provider: wsProvider});
 
                         if (credentials?.address) {
@@ -87,7 +87,7 @@ const handler = NextAuth({
                             };
                         }
 
-                        return Promise.reject(new Error('🚫 API Error'));
+                        return Promise.reject(new Error('unknown error occurred'));
                     } catch (e) {
                         return null;
                     }

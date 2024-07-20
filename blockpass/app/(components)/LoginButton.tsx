@@ -44,14 +44,13 @@ export default function LoginButton() {
 
             const result = await signIn('credentials', {
                 redirect: false,
-                callbackUrl: '/protected-api',
+                callbackUrl: '/events',
                 message: payload,
                 name: actingAccount?.meta?.name,
                 signature: signature,
                 address: actingAccount?.address,
             });
 
-            console.log(result?.url, result?.status);
             setError(result?.error ?? null);
             setIsLoading(false);
         } catch (error) {
@@ -64,7 +63,7 @@ export default function LoginButton() {
     return (
         <div className={"flex justify-center items-center h-screen"}>
             <div
-                className="min-w-[30rem] p-4 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
+                className="min-w-[30rem] p-4 border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
                 <form className="space-y-6" action="#">
                     <h5 className="text-xl font-medium text-gray-900 dark:text-white">Sign In to BlockPass</h5>
                     <AccountSelector/>
@@ -72,6 +71,9 @@ export default function LoginButton() {
                          className="w-full text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
                          onClick={handleLogin}>
                         Login to your account
+                    </div>
+                    <div>
+                        {error && <p className="text-red-500 text-sm">{error}</p>}
                     </div>
                 </form>
             </div>
