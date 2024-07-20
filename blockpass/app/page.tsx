@@ -25,7 +25,6 @@ const dummyEvent: Event = {
     "https://images.unsplash.com/photo-1500382017468-9049fed747ef?fm=jpg&q=60&w=3000&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8ZmllbGR8ZW58MHx8MHx8fDA%3D",
 };
 
-
 export default function Home() {
   const [page, setPage] = useState(0);
   const [event, setEvent] = useState<Event | null>(null);
@@ -44,38 +43,51 @@ export default function Home() {
 
   return (
     <main className="py-7 max-h-[100dvh] overflow-hidden">
-      <div className={`fixed z-10 top-0 left-0 w-full h-full duration-500 py-7 ${event ? "pointer-events-auto backdrop-blur-sm opacity-100" : " backdrop-blur-0 pointer-events-none opacity-0"}`} onClick={() => setEvent(null)}>
+      <div
+        className={`fixed z-10 top-0 left-0 w-full h-full duration-500 py-7 ${
+          event
+            ? "pointer-events-auto backdrop-blur-sm opacity-100"
+            : " backdrop-blur-0 pointer-events-none opacity-0"
+        }`}
+        onClick={() => setEvent(null)}
+      >
         <div
           className={` duration-500 bg-[#2c2c2c] pointer-events-auto w-[500px] h-full ml-auto mr-7 rounded-3xl shadow-2xl p-10 text-[24px] flex flex-col gap-5 ${
             event ? "translate-x-0" : " translate-x-[120%]"
           }`}
         >
-          <p>Vyoms Mudda</p>
           <Image
             alt=""
             width={300}
             height={500}
-            src={dummyEvent.thumbnail}
+            src={event?.thumbnail || ""}
             className=" w-full h-auto rounded-xl"
           />
+          <p>{event?.name}</p>
+          <p className=" font-extralight text-[12px]">{event?.description}</p>
           <div className="flex flex-col justify-between gap-2">
+            <p className="font-bold text-[24px] text-foreground">Location</p>
             <p
-              className="font-bold text-[24px] text-foreground"
+              className="font-medium -mt-2 text-[18px] text-foreground"
               suppressHydrationWarning
             >
-              {dummyEvent.location},{" "}
-              {new Date(dummyEvent.date).toLocaleDateString()}
+              {dummyEvent.location}
+            </p>
+            <p className="font-bold text-[24px] text-foreground">
+              Date and Time
             </p>
             <p
-              className="font-bold text-[18px] text-foreground"
+              className="font-medium text-[18px] text-foreground"
               suppressHydrationWarning
             >
+              {new Date(dummyEvent.date).toLocaleDateString()}{", "}
               {new Date(dummyEvent.date).toLocaleTimeString()}
             </p>
+            <button className="bg-primary mt-auto">Purchase</button>
           </div>
         </div>
       </div>
-      <NavigationBar setPage={setPage} page={page}/>
+      <NavigationBar setPage={setPage} page={page} />
       <div
         className="grid grid-cols-[100%_100%] overflow-hidden w-full "
         ref={scrollRef}
@@ -91,8 +103,8 @@ export default function Home() {
           </div>
 
           <div
-            className={`py-5 group w-[30%] hover:w-[40%] duration-[2000ms] ${
-              page == 1 && " !w-[140%]"
+            className={`py-5 group ease-in-out w-[30%] hover:w-[40%] duration-[2000ms] ${
+              page == 1 && " !w-[195%]"
             }`}
           >
             <div className=" relative w-full h-[1px] bg-[#fff] ">
@@ -146,13 +158,17 @@ export default function Home() {
             Discover Events
           </h1>
 
-          <div className="max-w-[1300px] py-4 mx-auto p-2 overflow-x-scroll no-scrollbar snap-x snap-mandatory">
-            <div className="w-full grid auto-cols-auto gap-[25px] grid-flow-col">
-                <EventCard setEvent={setEvent} event={dummyEvent} />
-                <EventCard setEvent={setEvent} event={dummyEvent} />
-                <EventCard setEvent={setEvent} event={dummyEvent} />
-                <EventCard setEvent={setEvent} event={dummyEvent} />
-                <EventCard setEvent={setEvent} event={dummyEvent} />
+          <div className="max-w-[1300px] py-4 mx-auto p-2 overflow-x-scroll snap-x snap-mandatory pb-10">
+            <div className="w-full grid auto-cols-auto gap-[45px] grid-flow-col">
+              <EventCard setEvent={setEvent} event={dummyEvent} />
+              <EventCard setEvent={setEvent} event={dummyEvent} />
+              <EventCard setEvent={setEvent} event={dummyEvent} />
+              <EventCard setEvent={setEvent} event={dummyEvent} />
+              <EventCard setEvent={setEvent} event={dummyEvent} />
+              <EventCard setEvent={setEvent} event={dummyEvent} />
+              <EventCard setEvent={setEvent} event={dummyEvent} />
+              <EventCard setEvent={setEvent} event={dummyEvent} />
+              <EventCard setEvent={setEvent} event={dummyEvent} />
             </div>
           </div>
         </div>

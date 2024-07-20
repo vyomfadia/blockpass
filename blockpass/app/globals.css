@@ -40,6 +40,33 @@
 }
 
 
+* {
+  --sb-track-color: #00000068;
+  --sb-thumb-color: #ffffff;
+  --sb-size: 4px;
+}
+
+*::-webkit-scrollbar {
+  height: 4px;
+}
+
+*::-webkit-scrollbar-track {
+  background: var(--sb-track-color);
+  border-radius: 0px;
+}
+
+*::-webkit-scrollbar-thumb {
+  background: var(--sb-thumb-color);
+  border-radius: 0px;
+  
+}
+
+@supports not selector(::-webkit-scrollbar) {
+  body {
+    scrollbar-color: var(--sb-thumb-color)
+                     var(--sb-track-color);
+  }
+}
 
 body {
   @apply bg-[#000] overflow-x-hidden;
