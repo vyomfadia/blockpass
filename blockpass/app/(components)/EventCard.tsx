@@ -25,7 +25,7 @@ export default function EventCard({
   return (
     <div
       ref={ref}
-      className={` ${className} w-[300px] h-[500px] overflow-hidden relative  drop-shadow-none hover:to-[100%] group cursor-pointer translate-y-0 hover:-translate-y-1 duration-300 `}
+      className={` ${className} w-[300px] snap-start hover:bg-[#fff1] h-[500px] overflow-hidden relative hover:backdrop-blur-[5px] drop-shadow-none hover:to-[100%] group cursor-pointer duration-300 `}
     >
       <div className="absolute right-0 w-[100px] h-[100px] border-t-2 border-r-2 border-[#fff] group-hover:h-full group-hover:w-full duration-500" />
       <div className="absolute left-0 bottom-0 w-[100px] h-[100px] border-b-2 border-l-2 border-[#fff] group-hover:h-full group-hover:w-full duration-500" />

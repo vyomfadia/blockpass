@@ -19,20 +19,55 @@ const dummyEvent: Event = {
 
 export default function Home() {
   const [page, setPage] = useState(0);
+  const [event, setEvent] = useState(null)
   const scrollRef: MutableRefObject<HTMLDivElement | null> = useRef(null);
 
   useLayoutEffect(() => {
-    console.log(scrollRef.current?.scrollWidth)
-    if(scrollRef && page == 0) scrollRef.current?.scrollTo({left: 0, behavior: "smooth"});
-    else if(scrollRef && page == 1) scrollRef.current?.scrollTo({left: scrollRef.current?.scrollWidth / 2, behavior: "smooth"});
+    console.log(scrollRef.current?.scrollWidth);
+    if (scrollRef && page == 0)
+      scrollRef.current?.scrollTo({ left: 0, behavior: "smooth" });
+    else if (scrollRef && page == 1)
+      scrollRef.current?.scrollTo({
+        left: scrollRef.current?.scrollWidth / 2,
+        behavior: "smooth",
+      });
   }, [page, scrollRef]);
 
   return (
-    <main className="py-10 max-h-[100dvh] overflow-hidden">
-      <NavigationBar setPage={setPage}/>
-      <div className="grid grid-cols-[100%_100%] overflow-hidden w-full " ref={scrollRef}>
+    <main className="py-7 max-h-[100dvh] overflow-hidden">
+      <div className="fixed z-10 top-0 left-0 w-full h-full pointer-events-none py-7">
+        <div className={ `bg-[#2c2c2c] pointer-events-auto w-[500px] h-full ml-auto mr-7 rounded-3xl shadow-2xl p-10 text-[24px] flex flex-col gap-5 ${!event && " translate-x-[120%]"}`}>
+          <p>Vyoms Mudda</p>
+          <Image
+            alt=""
+            width={300}
+            height={500}
+            src={dummyEvent.thumbnail}
+            className=" w-full h-auto rounded-xl"
+          />
+          <div className="flex flex-col justify-between gap-2">
+            <p
+              className="font-bold text-[24px] text-foreground"
+              suppressHydrationWarning
+            >
+              {dummyEvent.location}, {new Date(dummyEvent.date).toLocaleDateString()}
+            </p>
+            <p
+              className="font-bold text-[18px] text-foreground"
+              suppressHydrationWarning
+            >
+              {new Date(dummyEvent.date).toLocaleTimeString()}
+            </p>
+          </div>
+        </div>
+      </div>
+      <NavigationBar setPage={setPage} />
+      <div
+        className="grid grid-cols-[100%_100%] overflow-hidden w-full "
+        ref={scrollRef}
+      >
         <div>
-          <div className="flex justify-between overflow-hidden mx-auto -mb-[70px] -mt-[30px]">
+          <div className="flex justify-between overflow-hidden mx-auto -mb-[90px] mt-5 ">
             <div className="w-[200px] h-[300px] bg-primary" />
             <div className="w-[160px] h-[220px] bg-primary" />
             <div className="w-[250px] h-[160px] bg-primary" />
@@ -41,15 +76,19 @@ export default function Home() {
             <div className="w-[150px] h-[260px] bg-primary" />
           </div>
 
-          <div className={`py-5 group w-[30%] hover:w-[40%] duration-[2000ms] ${page == 1 && " w-[140%]"}`}>
+          <div
+            className={`py-5 group w-[30%] hover:w-[40%] duration-[2000ms] ${
+              page == 1 && " !w-[140%]"
+            }`}
+          >
             <div className=" relative w-full h-[1px] bg-[#fff] ">
-              <div className="w-[20px] h-[20px] left-full absolute bg-[#fff] rounded-full top-1/2  -translate-y-1/2" />
+              <div className="w-[20px] h-[20px] left-full absolute   rounded-full top-1/2  -translate-y-1/2  bg-[#EDEDED]" />
             </div>
           </div>
 
           <div className="grid grid-cols-[60%_40%] text-[48px] max-w-[1200px] mx-auto items-center mb-[150px]">
             <div className="flex-col gap-2 flex">
-              <h1 className="font-light leading-[120%] flex-wrap w-full flex gap-x-4">
+              <h1 className="font-light leading-[120%] flex-wrap w-full flex gap-x-4 [&>*]:text-[#EDEDED]">
                 <span className="hover:drop-shadow-glow drop-shadow-none duration-200 cursor-default">
                   Book
                 </span>
@@ -80,18 +119,27 @@ export default function Home() {
                 Bla bla bla subtext. Bla bla bla subtext.{" "}
               </p>
             </div>
-            <div className="border-[1px] border-[#fffa] mx-auto rounded-full flex justify-center w-[256px] h-[256px] items-center group cursor-pointer hover:border-[#ffff] duration-200" onClick={()=>setPage(1)}>
+            <div
+              className="border-[1px] border-[#fffa] mx-auto rounded-full flex justify-center w-[256px] h-[256px] items-center group cursor-pointer hover:border-[#ffff] duration-200"
+              onClick={() => setPage(1)}
+            >
               <DownChev className="rotate-[180deg] opacity-30 group-hover:opacity-100 duration-200 " />
             </div>
           </div>
         </div>
         <div>
-          <h1 className="text-[12px] font-light mx-auto mb-10 text-center">
+          <h1 className="text-[12px] font-light mx-auto mb-2 -mt-5 text-center">
             Discover Events
           </h1>
 
-          <div className="w-full flex max-w-[1200px]  mx-auto">
-            <EventCard event={dummyEvent} />
+          <div className="max-w-[1300px] py-4 mx-auto p-2 overflow-x-scroll no-scrollbar snap-x snap-mandatory">
+            <div className="w-full grid auto-cols-auto gap-[25px] grid-flow-col">
+              <EventCard event={dummyEvent} />
+              <EventCard event={dummyEvent} />
+              <EventCard event={dummyEvent} />
+              <EventCard event={dummyEvent} />
+              <EventCard event={dummyEvent} />
+            </div>
           </div>
         </div>
       </div>
