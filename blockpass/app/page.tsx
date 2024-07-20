@@ -5,7 +5,15 @@ import NavigationBar from "./(components)/NavigationBar";
 import EventCard from "./(components)/EventCard";
 import { Event } from "./types";
 import DownChev from "./(assets)/down.svg";
-import { MutableRefObject, useLayoutEffect, useRef, useState } from "react";
+import {
+  createContext,
+  Dispatch,
+  MutableRefObject,
+  SetStateAction,
+  useLayoutEffect,
+  useRef,
+  useState,
+} from "react";
 
 const dummyEvent: Event = {
   name: "Vyoms Mom",
@@ -17,9 +25,10 @@ const dummyEvent: Event = {
     "https://images.unsplash.com/photo-1500382017468-9049fed747ef?fm=jpg&q=60&w=3000&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8ZmllbGR8ZW58MHx8MHx8fDA%3D",
 };
 
+
 export default function Home() {
   const [page, setPage] = useState(0);
-  const [event, setEvent] = useState(null)
+  const [event, setEvent] = useState<Event | null>(null);
   const scrollRef: MutableRefObject<HTMLDivElement | null> = useRef(null);
 
   useLayoutEffect(() => {
@@ -35,8 +44,12 @@ export default function Home() {
 
   return (
     <main className="py-7 max-h-[100dvh] overflow-hidden">
-      <div className="fixed z-10 top-0 left-0 w-full h-full pointer-events-none py-7">
-        <div className={ `bg-[#2c2c2c] pointer-events-auto w-[500px] h-full ml-auto mr-7 rounded-3xl shadow-2xl p-10 text-[24px] flex flex-col gap-5 ${!event && " translate-x-[120%]"}`}>
+      <div className={`fixed z-10 top-0 left-0 w-full h-full duration-500 py-7 ${event ? "pointer-events-auto backdrop-blur-sm opacity-100" : " backdrop-blur-0 pointer-events-none opacity-0"}`} onClick={() => setEvent(null)}>
+        <div
+          className={` duration-500 bg-[#2c2c2c] pointer-events-auto w-[500px] h-full ml-auto mr-7 rounded-3xl shadow-2xl p-10 text-[24px] flex flex-col gap-5 ${
+            event ? "translate-x-0" : " translate-x-[120%]"
+          }`}
+        >
           <p>Vyoms Mudda</p>
           <Image
             alt=""
@@ -50,7 +63,8 @@ export default function Home() {
               className="font-bold text-[24px] text-foreground"
               suppressHydrationWarning
             >
-              {dummyEvent.location}, {new Date(dummyEvent.date).toLocaleDateString()}
+              {dummyEvent.location},{" "}
+              {new Date(dummyEvent.date).toLocaleDateString()}
             </p>
             <p
               className="font-bold text-[18px] text-foreground"
@@ -61,7 +75,7 @@ export default function Home() {
           </div>
         </div>
       </div>
-      <NavigationBar setPage={setPage} />
+      <NavigationBar setPage={setPage} page={page}/>
       <div
         className="grid grid-cols-[100%_100%] overflow-hidden w-full "
         ref={scrollRef}
@@ -134,11 +148,11 @@ export default function Home() {
 
           <div className="max-w-[1300px] py-4 mx-auto p-2 overflow-x-scroll no-scrollbar snap-x snap-mandatory">
             <div className="w-full grid auto-cols-auto gap-[25px] grid-flow-col">
-              <EventCard event={dummyEvent} />
-              <EventCard event={dummyEvent} />
-              <EventCard event={dummyEvent} />
-              <EventCard event={dummyEvent} />
-              <EventCard event={dummyEvent} />
+                <EventCard setEvent={setEvent} event={dummyEvent} />
+                <EventCard setEvent={setEvent} event={dummyEvent} />
+                <EventCard setEvent={setEvent} event={dummyEvent} />
+                <EventCard setEvent={setEvent} event={dummyEvent} />
+                <EventCard setEvent={setEvent} event={dummyEvent} />
             </div>
           </div>
         </div>

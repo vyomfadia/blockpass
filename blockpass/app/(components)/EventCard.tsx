@@ -2,15 +2,17 @@
 
 import Image from "next/image";
 import { Event } from "../types";
-import { useEffect, useRef, useState } from "react";
+import { Dispatch, SetStateAction, useContext, useEffect, useRef, useState } from "react";
 import { useOnScreen } from "../(hooks)/IsOnScreen";
 
 export default function EventCard({
   className,
   event,
+  setEvent,
 }: {
   className?: string;
   event: Event;
+  setEvent: Dispatch<SetStateAction<Event | null>>
 }) {
   const ref = useRef(null);
   const [loaded, setLoaded] = useState(false);
@@ -22,9 +24,11 @@ export default function EventCard({
     }
   }, [isOnScreen, loaded]);
 
+
   return (
     <div
       ref={ref}
+      onClick={() => setEvent(event)}
       className={` ${className} w-[300px] snap-start hover:bg-[#fff1] h-[500px] overflow-hidden relative hover:backdrop-blur-[5px] drop-shadow-none hover:to-[100%] group cursor-pointer duration-300 `}
     >
       <div className="absolute right-0 w-[100px] h-[100px] border-t-2 border-r-2 border-[#fff] group-hover:h-full group-hover:w-full duration-500" />
