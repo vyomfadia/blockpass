@@ -37,7 +37,7 @@ export default function Home() {
 
         <div className="grid grid-cols-[60%_40%] text-[48px] max-w-[1200px] mx-auto items-center">
           <div className="flex-col gap-4 flex">
-            <h1 className="font-light leading-[120%] flex-wrap w-full flex gap-x-4">
+            <h1 className="font-semibold leading-[120%] flex-wrap w-full flex gap-x-4">
               <span className="hover:drop-shadow-glow drop-shadow-none duration-200 cursor-default">Book</span> 
               <span className="hover:drop-shadow-glow drop-shadow-none duration-200 cursor-default">tickets</span> 
               <span className="hover:drop-shadow-glow drop-shadow-none duration-200 cursor-default">for</span> 
