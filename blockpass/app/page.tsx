@@ -56,13 +56,13 @@ export default function Home() {
             event ? "translate-x-0" : " translate-x-[120%]"
           }`}
         >
-          <Image
+          {event && <Image
             alt=""
             width={300}
             height={500}
-            src={event?.thumbnail || ""}
-            className=" w-full h-auto rounded-xl"
-          />
+            src={event?.thumbnail}
+            className=" w-full object-contain rounded-xl h-[500px]"
+          />}
           <p>{event?.name}</p>
           <p className=" font-extralight text-[12px]">{event?.description}</p>
           <div className="flex flex-col justify-between gap-2">
