@@ -8,16 +8,21 @@ const config: Config = {
   ],
   theme: {
     colors: {
-      'primary': '#E68369',
-      'secondary': '#ECCEAE',
-      'foreground': '#FBF6E2',
-      'background': '#131842',
+      primary: "#E68369",
+      secondary: "#ECCEAE",
+      foreground: "#FBF6E2",
+      background: "#131842",
     },
     extend: {
       backgroundImage: {
         "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
         "gradient-conic":
           "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
+      },
+      dropShadow: {
+        glow: [
+          "0 0px 5px rgba(255,255, 255, 1)"
+        ],
       },
     },
   },
