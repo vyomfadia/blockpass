@@ -130,7 +130,7 @@ export default function Home() {
               </h1>
               <p className="font-extralight w-[80%] text-[16px]">
                 Bla bla bla subtext. Bla bla bla subtext. Bla bla bla subtext.
-                Bla bla bla subtext. Bla bla bla subtext.{" "}
+                Bla bla bla subtext. Bla bla bla subtext.
               </p>
             </div>
             <div
