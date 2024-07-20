@@ -25,7 +25,7 @@ export default function RootLayout({children}: Readonly<{ children: React.ReactN
                         <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:ital,opsz,wght@0,6..12,200..1000;1,6..12,200..1000&display=swap" rel="stylesheet"/>
                     </head>
                     <body className={`${inter.className} h-[100svh] relative`}>
-                        <div className="absolute gradient h-full w-full">
+                        <div className="gradient h-full w-full fixed">
                         </div>
                         <div className="h-full relative">
                             {children}
