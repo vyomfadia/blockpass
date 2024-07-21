@@ -4,9 +4,8 @@ import EventsAbi from "@/app/(lib)/contracts/abi/events.json";
 import EventFactoryAbi from "@/app/(lib)/contracts/abi/creator.json";
 
 import {ethers} from "ethers";
-import {Tuple} from "@polkadot/types-codec";
 
-const eventCreatorContractAddress = "0xB942FA2273C7Bce69833e891BDdFd7212d2dA415"
+const eventCreatorContractAddress = "0x6f830bA763c6B49Fc415c1fD125b3eE49Eebb633"
 
 export async function listAllEvents() {
     const provider = new ethers.BrowserProvider((window as any).ethereum);

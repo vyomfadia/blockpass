@@ -132,6 +132,13 @@ contract Event is ERC721 {
 		}
 	}
 
+	function allowCheckIn() public {
+		require(msg.sender == owner, "not the owner");
+		require(status == EventStatus.Sales, "event not in sales period");
+
+		status = EventStatus.CheckIn;
+	}
+
 	function completeEvent() public {
 		require(msg.sender == owner, "not the owner");
 		require(status == EventStatus.CheckIn, "event not in check-in period");

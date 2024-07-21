@@ -249,6 +249,13 @@
     "type": "event"
   },
   {
+    "inputs": [],
+    "name": "allowCheckIn",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
     "inputs": [
       {
         "internalType": "address",
