@@ -55,11 +55,21 @@ export default function Home() {
         {/* Landing */}
         <div className="h-full flex flex-col justify-end relative">
           <div className="absolute top-0 grid grid-cols-5 gap-8 overflow-hidden mt-5 h-full w-full">
-            <div className="h-[300px] bg-primary" />
-            <div className="h-[220px] bg-primary" />
-            <div className="h-[160px] bg-primary" />
-            <div className="h-[200px] bg-primary" />
-            <div className="h-[160px] bg-primary" />
+            <div className=" grayscale">
+              <Image width={300} height={250} src="/hero/1.jpg" alt="concert"/>
+            </div>
+            <div className=" grayscale-1 h-[320px] overflow-hidden">
+              <Image width={300} height={250} src="/hero/2.jpg" alt="concert"/>
+            </div>
+            <div className="grayscale ">
+              <Image width={300} height={250} src="/hero/3.jpg" alt="concert"/>
+            </div>
+            <div className="grayscale h-[350px] overflow-hidden">
+              <Image width={300} height={250} src="/hero/5.jpg" alt="concert"/>
+            </div>
+            <div className=" grayscale">
+              <Image width={300} height={250} src="/hero/4.jpg" alt="concert"/>
+            </div>
           </div>
 
             <div className="pb-44">
@@ -98,7 +108,7 @@ export default function Home() {
         </div>
 
         {/* events */}
-        <div>
+        <div className="!text-gray">
           <h1 className="text-5xl font-black my-8 mx-20">
             Discover Events
           </h1>

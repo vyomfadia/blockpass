@@ -60,12 +60,6 @@
   mask-image: linear-gradient(to left, #010101, #010101 90%, #00000078);
 }
 
-.row{
-  white-space: nowrap;
-  overflow-x: auto;
-}
-
-
 * {
   --sb-track-color: #00000068;
   --sb-thumb-color: #ffffff;
