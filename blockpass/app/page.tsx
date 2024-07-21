@@ -43,55 +43,13 @@ export default function Home() {
 
   return (
     <main className="py-7 h-full overflow-hidden">
-      <div
-        className={`fixed z-10 top-0 left-0 w-full h-full duration-500 py-7 ${
-          event
-            ? "pointer-events-auto backdrop-blur-sm opacity-100"
-            : " backdrop-blur-0 pointer-events-none opacity-0"
-        }`}
-        onClick={() => setEvent(null)}
-      >
-        <div
-          className={` duration-500 bg-[#2c2c2c] pointer-events-auto w-[500px] h-full ml-auto mr-7 rounded-3xl shadow-2xl p-10 text-[24px] flex flex-col gap-5 ${
-            event ? "translate-x-0" : " translate-x-[120%]"
-          }`}
-        >
-          {event && <Image
-            alt=""
-            width={300}
-            height={500}
-            src={event?.thumbnail}
-            className=" w-full object-contain rounded-xl h-[500px]"
-          />}
-          <p>{event?.name}</p>
-          <p className=" font-extralight text-[12px]">{event?.description}</p>
-          <div className="flex flex-col justify-between gap-2">
-            <p className="font-bold text-[24px] text-foreground">Location</p>
-            <p
-              className="font-medium -mt-2 text-[18px] text-foreground"
-              suppressHydrationWarning
-            >
-              {dummyEvent.location}
-            </p>
-            <p className="font-bold text-[24px] text-foreground">
-              Date and Time
-            </p>
-            <p
-              className="font-medium text-[18px] text-foreground"
-              suppressHydrationWarning
-            >
-              {new Date(dummyEvent.date).toLocaleDateString()}{", "}
-              {new Date(dummyEvent.date).toLocaleTimeString()}
-            </p>
-            <button className="bg-primary mt-auto">Purchase</button>
-          </div>
-        </div>
-      </div>
       <NavigationBar setPage={setPage} page={page} />
       <div
         className="grid grid-cols-[100%_100%] overflow-hidden w-full h-full"
         ref={scrollRef}
       >
+
+        {/* Landing */}
         <div className="h-full flex flex-col justify-end relative">
           <div className="absolute top-0 grid grid-cols-5 gap-8 overflow-hidden mt-5 h-full w-full">
             <div className="h-[300px] bg-primary" />
@@ -134,6 +92,8 @@ export default function Home() {
               </div>
             </div>
         </div>
+
+      {/* events */}
         <div>
           <h1 className="text-[12px] font-light mx-auto mb-2 -mt-5 text-center">
             Discover Events
@@ -151,6 +111,50 @@ export default function Home() {
               <EventCard setEvent={setEvent} event={dummyEvent} />
               <EventCard setEvent={setEvent} event={dummyEvent} />
             </div>
+          </div>
+        </div>
+      </div>
+      <div
+        className={`fixed z-10 top-0 left-0 w-full h-full duration-500 py-7 ${
+          event
+            ? "pointer-events-auto backdrop-blur-sm opacity-100"
+            : " backdrop-blur-0 pointer-events-none opacity-0"
+        }`}
+        onClick={() => setEvent(null)}
+      >
+        <div
+          className={` duration-500 bg-[#2c2c2c] pointer-events-auto w-[500px] h-full ml-auto mr-7 rounded-3xl shadow-2xl p-10 text-[24px] flex flex-col gap-5 ${
+            event ? "translate-x-0" : " translate-x-[120%]"
+          }`}
+        >
+          {event && <Image
+            alt=""
+            width={300}
+            height={500}
+            src={event?.thumbnail}
+            className=" w-full object-contain rounded-xl h-[500px]"
+          />}
+          <p>{event?.name}</p>
+          <p className=" font-extralight text-[12px]">{event?.description}</p>
+          <div className="flex flex-col justify-between gap-2">
+            <p className="font-bold text-[24px] text-foreground">Location</p>
+            <p
+              className="font-medium -mt-2 text-[18px] text-foreground"
+              suppressHydrationWarning
+            >
+              {dummyEvent.location}
+            </p>
+            <p className="font-bold text-[24px] text-foreground">
+              Date and Time
+            </p>
+            <p
+              className="font-medium text-[18px] text-foreground"
+              suppressHydrationWarning
+            >
+              {new Date(dummyEvent.date).toLocaleDateString()}{", "}
+              {new Date(dummyEvent.date).toLocaleTimeString()}
+            </p>
+            <button className="bg-primary mt-auto">Purchase</button>
           </div>
         </div>
       </div>
