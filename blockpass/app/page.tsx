@@ -181,7 +181,7 @@ export default function Home() {
                 {new Date(Number(event?.date)).toLocaleTimeString()}
               </p>
               <p className="font-bold text-xl text-foreground">Price</p>
-              <p>{`${event?.price} DOT`}</p>
+              <p>{`${event?.price} GMLR`}</p>
               <button
                 onClick={() => {
                   const provider = new ethers.BrowserProvider(
