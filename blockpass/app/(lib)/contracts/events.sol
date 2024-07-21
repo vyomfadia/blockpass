@@ -8,10 +8,13 @@ import "@openzeppelin/contracts/access/Ownable.sol";
 contract EventFactory {
 	Event[] public events;
 
+	mapping(address => uint) addressToIndex;
+
 	function releaseNewEvent(uint64 _ticketCount, uint64 _pricing, uint64 _date, string memory _location, string memory _eventThumbnail, string memory _eventName, string memory _eventSymbol) external returns (address newEvent) {
 		Event e = new Event(msg.sender, _ticketCount, _pricing, _date, _location, _eventThumbnail, _eventName, _eventSymbol);
 
 		events.push(e);
+		addressToIndex[address(e)] = events.length - 1;
 		return address(e);
 	}
 
@@ -26,6 +29,10 @@ contract EventFactory {
 		}
 
 		return _events;
+	}
+
+	function getEvent(address e) public view returns (Event) {
+		return events[addressToIndex[e]];
 	}
 }
 
@@ -130,5 +137,9 @@ contract Event is ERC721 {
 		require(status == EventStatus.CheckIn, "event not in check-in period");
 
 		status = EventStatus.Complete;
+	}
+
+	function getTicket(uint ticketId) public view returns (Ticket memory) {
+		return tickets[ticketId];
 	}
 }

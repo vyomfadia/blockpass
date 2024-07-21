@@ -19,6 +19,25 @@
     "type": "function"
   },
   {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "e",
+        "type": "address"
+      }
+    ],
+    "name": "getEvent",
+    "outputs": [
+      {
+        "internalType": "contract Event",
+        "name": "",
+        "type": "address"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
     "inputs": [],
     "name": "getEventCount",
     "outputs": [
