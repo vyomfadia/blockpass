@@ -68,6 +68,11 @@
       },
       {
         "internalType": "string",
+        "name": "_eventThumbnail",
+        "type": "string"
+      },
+      {
+        "internalType": "string",
         "name": "_eventName",
         "type": "string"
       },
