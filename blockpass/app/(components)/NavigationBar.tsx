@@ -2,7 +2,7 @@
 import Link from "next/link";
 import { Dispatch, SetStateAction, useEffect, useState } from "react";
 import Logo from "@/public/logo.svg";
-import Login from "../login/page";
+import Login from "../wallet/page";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 
 function NavigationBarButton({ text, link }: any) {
@@ -43,7 +43,7 @@ export default function NavigationBar() {
       <div className="h-[80px]">
         <Logo />
       </div>
-      <NavigationBarButton text="Wallet" link="/login" />
+      <NavigationBarButton text="Wallet" link="/wallet" />
       <NavigationBarButton text="Manage" link="/dashboard" />
     </div>
   );
