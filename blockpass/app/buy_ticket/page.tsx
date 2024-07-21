@@ -17,7 +17,7 @@ export default function BuyTicket() {
     }, []);
 
     const buyTicket = (contractId: string, price: number) => {
-        const provider = new ethers.BrowserProvider(window.ethereum);
+        const provider = new ethers.BrowserProvider((window as any).ethereum);
 
         const increment = async () => {
             const signer = await provider.getSigner();

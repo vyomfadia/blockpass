@@ -1,7 +1,7 @@
 import { NextApiRequest, NextApiResponse } from "next";
 import {insertTickets} from "@/app/(lib)/database/ticket_manager";
 
-export function POST(req: NextApiRequest, res: NextApiResponse): void {
+export function POST(req: any, res: any): void {
     const {buyerAddress, tokenId, eventId} = req.body;
     if (!buyerAddress || !tokenId || !eventId) {
         res.status(400).json({error: 'missing parameters'});

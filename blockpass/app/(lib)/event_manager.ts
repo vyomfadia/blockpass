@@ -8,7 +8,7 @@ import {ethers} from "ethers";
 const eventCreatorContractAddress = "0x70c636254700Ff64C14b130D91455E23E76FAf3E"
 
 export async function listAllEvents() {
-    const provider = new ethers.BrowserProvider(window.ethereum);
+    const provider = new ethers.BrowserProvider((window as any).ethereum);
     const contract = new ethers.Contract(eventCreatorContractAddress, EventFactoryAbi, provider);
 
     const events = await contract.listAllEvents();
