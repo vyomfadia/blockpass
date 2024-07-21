@@ -28,11 +28,6 @@ export default function Login() {
         });
     }, []);
 
-
-    useLayoutEffect(() => {
-        listAllEvents().then((events) => {setEvents(events)})
-    }, [])
-
     return (
         <main className="py-7 h-full overflow-hidden">
             <NavigationBar/>

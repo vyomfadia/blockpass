@@ -49,6 +49,7 @@ export default function BuyTicket() {
                             <p>{e.date.toString()}</p>
                             <p>{e.price.toString()}</p>
                             <p>{e.remainingTickets.toString()}</p>
+                            <p>{e.eventThumbnail.toString()}</p>
                             <div role="button" className="bg-[#000000] p-4" onClick={() => buyTicket(e.contractId, e.price)}>
                                 BUY ME
                             </div>
