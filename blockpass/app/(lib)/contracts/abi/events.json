@@ -28,6 +28,11 @@
       },
       {
         "internalType": "string",
+        "name": "_eventThumbnail",
+        "type": "string"
+      },
+      {
+        "internalType": "string",
         "name": "_eventName",
         "type": "string"
       },
@@ -295,6 +300,20 @@
   },
   {
     "inputs": [],
+    "name": "cancelEvent",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "completeEvent",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [],
     "name": "date",
     "outputs": [
       {
@@ -422,6 +441,13 @@
   },
   {
     "inputs": [],
+    "name": "payoutOwner",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [],
     "name": "price",
     "outputs": [
       {
@@ -431,6 +457,19 @@
       }
     ],
     "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "_ticketID",
+        "type": "uint256"
+      }
+    ],
+    "name": "refundTicket",
+    "outputs": [],
+    "stateMutability": "nonpayable",
     "type": "function"
   },
   {
@@ -513,6 +552,19 @@
     "name": "setApprovalForAll",
     "outputs": [],
     "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "status",
+    "outputs": [
+      {
+        "internalType": "enum Event.EventStatus",
+        "name": "",
+        "type": "uint8"
+      }
+    ],
+    "stateMutability": "view",
     "type": "function"
   },
   {

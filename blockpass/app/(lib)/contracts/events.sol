@@ -6,91 +6,129 @@ import "@openzeppelin/contracts/utils/Counters.sol";
 import "@openzeppelin/contracts/access/Ownable.sol";
 
 contract EventFactory {
-    Event[] public events;
+	Event[] public events;
 
-    function releaseNewEvent(uint64 _ticketCount, uint64 _pricing, uint64 _date, string memory _location, string memory _eventThumbnail, string memory _eventName, string memory _eventSymbol)  external returns (address newEvent) {
-        Event e = new Event(msg.sender, _ticketCount, _pricing, _date, _location, _eventThumbnail, _eventName, _eventSymbol);
+	function releaseNewEvent(uint64 _ticketCount, uint64 _pricing, uint64 _date, string memory _location, string memory _eventThumbnail, string memory _eventName, string memory _eventSymbol) external returns (address newEvent) {
+		Event e = new Event(msg.sender, _ticketCount, _pricing, _date, _location, _eventThumbnail, _eventName, _eventSymbol);
 
-        events.push(e);
-        return address(e);
-    }
+		events.push(e);
+		return address(e);
+	}
 
-    function getEventCount() public view returns (uint) {
-        return events.length;
-    }
+	function getEventCount() public view returns (uint) {
+		return events.length;
+	}
 
-    function listAllEvents() external view returns(Event[] memory _events) {
-        _events = new Event[] (events.length);
-        for (uint i=0; i<events.length; i++){
-            _events[i] = events[i];
-        }
+	function listAllEvents() external view returns (Event[] memory _events) {
+		_events = new Event[](events.length);
+		for (uint i = 0; i < events.length; i++) {
+			_events[i] = events[i];
+		}
 
-        return _events;
-    }
+		return _events;
+	}
 }
 
 contract Event is ERC721 {
-    enum TicketStatus {Valid, Used, Refunded}
-    struct Ticket {
-        uint salePrice;
-        TicketStatus status;
-    }
+	enum EventStatus {Sales, CheckIn, Complete, Cancelled}
+	enum TicketStatus {Valid, Used, Refunded}
+	struct Ticket {
+		uint salePrice;
+		TicketStatus status;
+	}
 
-    string public location;
-    uint64 public date;
-    uint   public price;
-    uint   public remainingTickets;
-    string public eventThumbnail;
+	string public location;
+	uint64 public date;
+	uint   public price;
+	uint   public remainingTickets;
+	string public eventThumbnail;
 
-    // The money gets sent here.
-    address payable public owner;
+	EventStatus public status;
 
-    Ticket[] public tickets;
+	// The money gets sent here.
+	address payable public owner;
 
-    event CreateTicket(address buyer, address eventId, uint ticketID);
+	mapping(uint => address) ticketToBuyerMapping;
 
-    constructor(address _owner, uint _ticketCount, uint _price, uint64 _date, string memory _location, string memory _eventThumbnail, string memory _eventName, string memory _eventSymbol) ERC721(_eventName, _eventSymbol) {
-        bytes memory eventNameBytes = bytes(_eventName);
-        bytes memory eventSymbolBytes = bytes(_eventSymbol);
-        require(eventNameBytes.length != 0, "event name");
-        require(eventSymbolBytes.length != 0, "event symbol");
+	Ticket[] public tickets;
 
-        location = _location;
-        date = _date;
-        price = _price;
-        remainingTickets = _ticketCount;
-        eventThumbnail = _eventThumbnail;
+	event CreateTicket(address buyer, address eventId, uint ticketID);
 
-        owner = payable(_owner);
-    }
+	constructor(address _owner, uint _ticketCount, uint _price, uint64 _date, string memory _location, string memory _eventThumbnail, string memory _eventName, string memory _eventSymbol) ERC721(_eventName, _eventSymbol) {
+		bytes memory eventNameBytes = bytes(_eventName);
+		bytes memory eventSymbolBytes = bytes(_eventSymbol);
+		require(eventNameBytes.length != 0, "event name");
+		require(eventSymbolBytes.length != 0, "event symbol");
 
-    function buyTicket() public payable returns (uint) {
-        require(remainingTickets > 0, "no remaining tickets");
-        require(msg.value >= price, "no moneys");
+		location = _location;
+		date = _date;
+		price = _price;
+		remainingTickets = _ticketCount;
+		eventThumbnail = _eventThumbnail;
 
-        tickets.push(Ticket(price, TicketStatus.Valid));
-        uint ticketID = tickets.length - 1;
-        remainingTickets--;
+		owner = payable(_owner);
+	}
 
+	function buyTicket() public payable returns (uint) {
+		require(remainingTickets > 0, "no remaining tickets");
+		require(msg.value >= price, "no moneys");
+		require(status == EventStatus.Sales, "cannot buy tickets outside of sales period");
 
-        bool sent = owner.send(msg.value);
-        require(sent, "transaction failed");
+		tickets.push(Ticket(price, TicketStatus.Valid));
+		uint ticketID = tickets.length - 1;
+		remainingTickets--;
 
-        _safeMint(msg.sender, ticketID);
-        emit CreateTicket(msg.sender, address(this), ticketID);
+		ticketToBuyerMapping[ticketID] = msg.sender;
 
-        return ticketID;
-    }
+		_safeMint(msg.sender, ticketID);
+		emit CreateTicket(msg.sender, address(this), ticketID);
 
-//    function refundTicket(uint _ticketID) public {
-//        require(ownerOf(_ticketID) == msg.sender, "not your ticket");
-//        require(tickets[_ticketID].status == TicketStatus.Valid, "ticket not valid");
-//
-//        tickets[_ticketID].status = TicketStatus.Refunded;
-//        remainingTickets++;
-//        _burn(_ticketID);
-//
-//        bool sent = owner.transfer(tickets[_ticketID].salePrice);
-//        require(sent);
-//    }
+		return ticketID;
+	}
+
+	function refundTicket(uint _ticketID) public {
+		require(ownerOf(_ticketID) == msg.sender, "not your ticket");
+		require(tickets[_ticketID].status == TicketStatus.Valid, "ticket not valid");
+		require(status == EventStatus.Sales, "cannot refund tickets outside of sales period");
+
+		tickets[_ticketID].status = TicketStatus.Refunded;
+		remainingTickets++;
+		_burn(_ticketID);
+
+		bool sent = payable(ticketToBuyerMapping[_ticketID]).send(tickets[_ticketID].salePrice);
+		require(sent);
+	}
+
+	function payoutOwner() public {
+		require(msg.sender == owner, "not the owner");
+		require(status == EventStatus.Complete, "event not complete");
+
+		bool sent = owner.send(address(this).balance);
+		require(sent);
+	}
+
+	function cancelEvent() public {
+		require(msg.sender == owner, "not the owner");
+		require(status == EventStatus.Sales, "event not in sales period");
+
+		status = EventStatus.Cancelled;
+		for (uint i = 0; i < tickets.length; i++) {
+			if (tickets[i].status == TicketStatus.Valid) {
+				tickets[i].status = TicketStatus.Refunded;
+				remainingTickets++;
+
+				_burn(i);
+
+				bool sent = payable(ticketToBuyerMapping[i]).send(tickets[i].salePrice);
+				require(sent);
+			}
+		}
+	}
+
+	function completeEvent() public {
+		require(msg.sender == owner, "not the owner");
+		require(status == EventStatus.CheckIn, "event not in check-in period");
+
+		status = EventStatus.Complete;
+	}
 }
