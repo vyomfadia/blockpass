@@ -38,15 +38,16 @@ contract Event is ERC721 {
 
     string public location;
     uint64 public date;
-    uint64 public price;
-    uint64 public remainingTickets;
+    uint   public price;
+    uint   public remainingTickets;
+    string public eventThumbnail;
 
     // The money gets sent here.
     address payable public owner;
 
     Ticket[] public tickets;
 
-    constructor(address _owner, uint64 _ticketCount, uint64 _price, uint64 _date, string memory _location, string memory _eventName, string memory _eventSymbol) ERC721(_eventName, _eventSymbol) {
+    constructor(address _owner, uint _ticketCount, uint _price, uint64 _date, string memory _location, string memory _eventName, string memory _eventSymbol) ERC721(_eventName, _eventSymbol) {
         bytes memory eventNameBytes = bytes(_eventName);
         bytes memory eventSymbolBytes = bytes(_eventSymbol);
         require(eventNameBytes.length != 0, "event name");

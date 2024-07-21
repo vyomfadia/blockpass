@@ -3,16 +3,7 @@ import EventFactoryAbi from "@/app/(lib)/contracts/abi/creator.json";
 
 import {Web3} from "web3";
 
-const eventCreatorContractAddress = "0x527FC4060Ac7Bf9Cd19608EDEeE8f09063A16cd4"
-
-type EventDetails = {
-    location: string;
-    date: number;
-    price: number;
-    remainingTickets: number;
-    name: string;
-    symbol: string;
-}
+const eventCreatorContractAddress = "0x85b108660f47cadfab9e0503104c08c1c96e0da9"
 
 export async function listAllEvents() {
     const web3 = new Web3("https://de2a-62-23-207-10.ngrok-free.app/");
@@ -33,7 +24,7 @@ export async function listAllEvents() {
         const name = await eventContract.methods.name().call();
         const symbol = await eventContract.methods.symbol().call();
 
-        out.push({location, date, price, remainingTickets, name, symbol});
+        out.push({location, date, price, remainingTickets, name, symbol, contractId: events[i]});
     }
 
     return out;
