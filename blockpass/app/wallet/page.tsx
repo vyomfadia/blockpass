@@ -34,8 +34,8 @@ export default function Login() {
     useEffect(() => {
         listAllEvents().then((events) => {
             let userTix = []
-            transactions.filter((bought) => {
-                events.filter((ticket) => {
+            transactions.forEach((bought) => {
+                events.forEach((ticket) => {
                     if (ticket.contractId === bought.eventId){
                         userTix.push(ticket)
                     }

@@ -149,4 +149,9 @@ contract Event is ERC721 {
 	function getTicket(uint ticketId) public view returns (Ticket memory) {
 		return tickets[ticketId];
 	}
+
+	function verifyTicket(uint ticketId) public {
+		require(tickets[ticketId].status == TicketStatus.Valid, "ticket not valid");
+		tickets[ticketId].status = TicketStatus.Used;
+	}
 }
