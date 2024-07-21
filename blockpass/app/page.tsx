@@ -149,13 +149,14 @@ export default function Home() {
             x
           </div> */}
           {event && (
-            <Image
-              alt=""
-              width={300}
-              height={200}
-              src={event?.eventThumbnail}
-              className="w-full object-cover object-top max-h-[300px]"
-            />
+            <></>
+            // <Image
+            //   alt=""
+            //   width={300}
+            //   height={200}
+            //   src={event?.eventThumbnail}
+            //   className="w-full object-cover object-top max-h-[300px]"
+            // />
           )}
 
           <div className="p-8 grid grid-cols-[50%_50%] auto-rows-auto">
