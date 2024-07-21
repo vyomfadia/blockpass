@@ -12,6 +12,7 @@ const config: Config = {
       secondary: "#ECCEAE",
       foreground: "#FBF6E2",
       background: "#131842",
+      gray: "#93868F"
     },
     extend: {
       backgroundImage: {
@@ -19,8 +20,8 @@ const config: Config = {
         "gradient-conic":
           "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
       },
-      fontFamily: { 
-        "nunito": ["Nunito Sans", "sans-serif"] 
+      fontFamily: {
+        nunito: ['var(--font-nunito)'],
       },
       dropShadow: {
         glow: [

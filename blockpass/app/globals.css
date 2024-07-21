@@ -70,7 +70,7 @@
 
 body {
   @apply bg-[#000] overflow-x-hidden;
-  @apply font-nunito;
+  @apply text-gray;
   color: rgb(var(--foreground-rgb));
 }
 
