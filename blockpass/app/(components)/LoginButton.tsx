@@ -51,6 +51,10 @@ export default function LoginButton() {
                 address: actingAccount?.address,
             });
 
+            if (result?.ok) {
+
+            }
+
             setError(result?.error ?? null);
             setIsLoading(false);
         } catch (error) {

@@ -98,9 +98,28 @@ const handler = NextAuth({
             strategy: 'jwt',
             // maxAge: 3, // uncomment to test session expiration in seconds
         },
-        jwt: {
-            secret: process.env.NEXTAUTH_SECRET,
-        },
+        callbacks: {
+            async jwt({token, user}) {
+                if (user) {
+                    token.freeBalance = user.freeBalance;
+                }
+                return token;
+            },
+            async session(sessionData) {
+                const {session, token} = sessionData;
+
+                session.address = token.sub;
+                if (session.address) {
+                    session.ksmAddress = encodeAddress(session.address, 2);
+                }
+
+                // as we already queried it, we can add whatever token to the session,
+                // so pages can use it without an extra query
+                session.freeBalance = token.freeBalance as BN;
+
+                return session;
+            }
+        }
     }
 )
 

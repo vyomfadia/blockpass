@@ -1,0 +1,91 @@
+[
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "name": "events",
+    "outputs": [
+      {
+        "internalType": "contract Event",
+        "name": "",
+        "type": "address"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "getEventCount",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "listAllEvents",
+    "outputs": [
+      {
+        "internalType": "contract Event[]",
+        "name": "_events",
+        "type": "address[]"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint64",
+        "name": "_ticketCount",
+        "type": "uint64"
+      },
+      {
+        "internalType": "uint64",
+        "name": "_pricing",
+        "type": "uint64"
+      },
+      {
+        "internalType": "uint64",
+        "name": "_date",
+        "type": "uint64"
+      },
+      {
+        "internalType": "string",
+        "name": "_location",
+        "type": "string"
+      },
+      {
+        "internalType": "string",
+        "name": "_eventName",
+        "type": "string"
+      },
+      {
+        "internalType": "string",
+        "name": "_eventSymbol",
+        "type": "string"
+      }
+    ],
+    "name": "releaseNewEvent",
+    "outputs": [
+      {
+        "internalType": "address",
+        "name": "newEvent",
+        "type": "address"
+      }
+    ],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  }
+]

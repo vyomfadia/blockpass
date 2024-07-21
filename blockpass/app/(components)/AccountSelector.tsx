@@ -19,7 +19,7 @@ export default function AccountSelector() {
             className={"w-full text-sm border border-gray-300 bg-black text-[#000000] rounded-lg p-2"}
         >
             {accounts?.map((acc) => (
-                <option key={acc.address} value={acc.address}>
+                <option key={acc.address+" "+acc.meta.name} value={acc.address}>
                     {acc.meta?.name} - {acc.address}
                 </option>
             ))}
