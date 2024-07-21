@@ -4,7 +4,6 @@ import { Dispatch, SetStateAction, useEffect, useState } from "react";
 import Logo from "@/public/logo.svg";
 import Login from "../login/page";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
-import { useSession } from "next-auth/react";
 
 function NavigationBarButton({ text, link }: any) {
   const pathName = usePathname();
@@ -37,8 +36,6 @@ function NavigationBarButton({ text, link }: any) {
 }
 
 export default function NavigationBar() {
-  const authSession = useSession();
-  
   return (
     <div className="flex justify-between w-full relative mx-auto pb-8 px-20 items-center ">
       <NavigationBarButton text="Home" link="/" />
@@ -46,7 +43,7 @@ export default function NavigationBar() {
       <div className="h-[80px]">
         <Logo />
       </div>
-      <NavigationBarButton text={authSession.status == "authenticated" ? "Wallet" : "Login"} link="/login" />
+      <NavigationBarButton text="Wallet" link="/login" />
       <NavigationBarButton text="Manage" link="/dashboard" />
     </div>
   );
