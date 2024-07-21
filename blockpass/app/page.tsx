@@ -62,7 +62,7 @@ export default function Home() {
             <div className="h-[160px] bg-primary" />
           </div>
 
-          <div className="pb-32">
+            <div className="pb-44">
             <div
               className={`py-5 group ease-in-out w-[30%] hover:w-[40%] duration-[2000ms] ${
                 qp.has("discover") && " !w-[195%]"
@@ -73,19 +73,19 @@ export default function Home() {
               </div>
             </div>
 
-            <div className="grid grid-cols-[60%_40%] max-w-[1200px] mx-auto items-center text-gray ">
-              {/* Hero Text */}
-              <div className="flex-col gap-4 flex">
-                {/* Hero Title */}
-                <h1 className="font-semibold text-5xl">
-                  Book tickets for your favourite artists with security
-                </h1>
-                {/* Subheading */}
-                <p className="font-extralight w-[80%]">
-                  Bla bla bla subtext. Bla bla bla subtext. Bla bla bla subtext.
-                  Bla bla bla subtext. Bla bla bla subtext.{" "}
-                </p>
-              </div>
+              <div className="grid grid-cols-[60%_40%] max-w-[1200px] mx-auto items-center text-gray ">
+                {/* Hero Text */}
+                <div className="flex-col gap-4 flex self-end">
+                  {/* Hero Title */}
+                  <h1 className="font-semibold text-5xl">
+                      Book tickets for your favourite artists with security
+                  </h1>
+                  {/* Subheading */}
+                  <p className="font-extralight w-[80%]">
+                    Bla bla bla subtext. Bla bla bla subtext. Bla bla bla subtext.
+                    Bla bla bla subtext. Bla bla bla subtext.{" "}
+                  </p>
+                </div>
 
               {/* Next button */}
               <Link href="/?discover">
@@ -99,12 +99,13 @@ export default function Home() {
 
         {/* events */}
         <div>
-          <h1 className="text-[12px] font-light mx-auto mb-2 -mt-5 text-center">
+          <h1 className="text-5xl font-black my-8 mx-20">
             Discover Events
           </h1>
 
-          <div className="max-w-[1300px] py-4 mx-auto p-2 overflow-x-scroll snap-x snap-mandatory pb-10">
-            <div className="w-full grid auto-cols-auto gap-[45px] grid-flow-col">
+          <div className="w-full py-4 mx-auto p-2 overflow-x-scroll no-scrollbar snap-x snap-mandatory pb-10 flex flex-col justify-center gradient-scroll">
+            <div className="grid auto-cols-auto gap-8 grid-flow-col no-scrollbar overflow-auto whitespace-nowrap px-10 -mx-40">
+              <div className="h-4 p-20"></div>
               <EventCard setEvent={setEvent} event={dummyEvent} />
               <EventCard setEvent={setEvent} event={dummyEvent} />
               <EventCard setEvent={setEvent} event={dummyEvent} />
