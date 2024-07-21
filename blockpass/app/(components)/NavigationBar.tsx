@@ -44,7 +44,7 @@ export default function NavigationBar() {
         <Logo />
       </div>
       <NavigationBarButton text="Wallet" link="/wallet" />
-      <NavigationBarButton text="Manage" link="/dashboard" />
+      <NavigationBarButton text="Manage" link="https://a3cf-82-163-195-170.ngrok-free.app" />
     </div>
   );
 }

@@ -67,7 +67,7 @@ export default function Login() {
             transactions.filter((bought) => {
                 events.filter((ticket) => {
                     console.log(bought)
-                    if (ticket.contractId === bought.eventId){
+                    if (ticket.contractId === bought.eventId) {
                         let newTicket = {...ticket, ...bought}
                         userTix.push(newTicket)
                     }
