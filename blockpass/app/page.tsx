@@ -16,6 +16,7 @@ import {
 } from "react";
 import { useSearchParams } from "next/navigation";
 import Link from "next/link";
+import { listAllEvents } from "./(lib)/event_manager";
 
 const dummyEvent: Event = {
   name: "Vyoms Mom",
@@ -28,12 +29,16 @@ const dummyEvent: Event = {
 };
 
 export default function Home() {
-  // const [page, setPage] = useState(0);
 
   const qp = useSearchParams();
 
   const [event, setEvent] = useState<Event | null>(null);
+  const [events, setEvents] = useState([]);
   const scrollRef: MutableRefObject<HTMLDivElement | null> = useRef(null);
+
+  useLayoutEffect(() => {
+    listAllEvents().then(events => {setEvents(events); console.log(events)})
+}, [])
 
   useLayoutEffect(() => {
     if (scrollRef && !qp.has("discover"))
@@ -116,15 +121,7 @@ export default function Home() {
           <div className="w-full py-4 mx-auto p-2 overflow-x-scroll no-scrollbar snap-x snap-mandatory pb-10 flex flex-col justify-center gradient-scroll">
             <div className="grid auto-cols-auto gap-8 grid-flow-col no-scrollbar overflow-auto whitespace-nowrap px-10 -mx-40">
               <div className="h-4 p-20"></div>
-              <EventCard setEvent={setEvent} event={dummyEvent} />
-              <EventCard setEvent={setEvent} event={dummyEvent} />
-              <EventCard setEvent={setEvent} event={dummyEvent} />
-              <EventCard setEvent={setEvent} event={dummyEvent} />
-              <EventCard setEvent={setEvent} event={dummyEvent} />
-              <EventCard setEvent={setEvent} event={dummyEvent} />
-              <EventCard setEvent={setEvent} event={dummyEvent} />
-              <EventCard setEvent={setEvent} event={dummyEvent} />
-              <EventCard setEvent={setEvent} event={dummyEvent} />
+              {events.map((event, i) => <EventCard key={i} setEvent={setEvent} event={event} />)}
             </div>
           </div>
         </div>

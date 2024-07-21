@@ -11,7 +11,7 @@ export default function EventCard({
   setEvent,
 }: {
   className?: string;
-  event: Event;
+  event: any;
   setEvent: Dispatch<SetStateAction<Event | null>>
 }) {
   const ref = useRef(null);
@@ -77,7 +77,7 @@ export default function EventCard({
               {event.location}
             </p>
             <p className="text-lg">
-            {new Date(event.date).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}
+            {new Date(Number(event.date)).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}
             </p>
           </div>
 
@@ -89,7 +89,7 @@ export default function EventCard({
               className="text-lg"
               suppressHydrationWarning
             >
-              {new Date(event.date).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
+              {new Date(Number(event.date)).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
             </p>
           </div>
 
