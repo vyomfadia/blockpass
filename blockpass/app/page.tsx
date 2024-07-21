@@ -7,6 +7,7 @@ import EventsAbi from "@/app/(lib)/contracts/abi/events.json";
 import { Event } from "./types";
 import { ethers } from "ethers";
 import DownChev from "./(assets)/down.svg";
+import { motion } from "framer-motion"
 import {
   createContext,
   Dispatch,
@@ -63,7 +64,7 @@ export default function Home() {
         ref={scrollRef}
       >
         {/* Landing */}
-        <div className="h-full flex flex-col justify-end relative">
+        <motion.div className="h-full flex flex-col justify-end relative opacity-0" animate={{ opacity: 100 }} transition={{ duration: 0.8 }}>
           <div className="absolute top-0 grid grid-cols-5 gap-8 overflow-hidden mt-5 h-full w-full">
             <div className=" grayscale">
               <Image width={300} height={250} src="/hero/1.jpg" alt="concert" />
@@ -115,7 +116,7 @@ export default function Home() {
               </Link>
             </div>
           </div>
-        </div>
+        </motion.div>
 
         {/* events */}
         <div className="!text-gray">
@@ -149,14 +150,13 @@ export default function Home() {
             x
           </div> */}
           {event && (
-            <></>
-            // <Image
-            //   alt=""
-            //   width={300}
-            //   height={200}
-            //   src={event?.eventThumbnail}
-            //   className="w-full object-cover object-top max-h-[300px]"
-            // />
+            <Image
+              alt=""
+              width={300}
+              height={200}
+              src={event?.eventThumbnail}
+              className="w-full object-cover object-top max-h-[300px]"
+            />
           )}
 
           <div className="p-8 grid grid-cols-[50%_50%] auto-rows-auto">

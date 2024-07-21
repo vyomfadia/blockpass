@@ -31,6 +31,10 @@ export default function EventCard({
     }
   }, [isOnScreen, loaded]);
 
+
+  
+  console.log(event)
+
   return (
     <div
       ref={ref}
@@ -61,20 +65,17 @@ export default function EventCard({
           </svg>
         </div>
         <div className="card-gradient h-full relative">
-            {/* <Image
+            <Image
               alt=""
               width={300}
               height={300}
               src={event.eventThumbnail}
               className="w-full object-cover h-full absolute opacity-[20%]"
-            /> */}
+            />
           <div className="h-full flex flex-col p-4 justify-end">
             <p className="mt-auto font-black text-3xl z-20">{event.name}</p>
           </div>
         </div>
-        {/* <p className={`font-normal text-[48px] text-foreground`}>
-          {event.name}
-        </p> */}
         <div className="flex justify-between gap-2 p-4 py-8">
           <div className="flex flex-col gap-2">
             <p
