@@ -31,7 +31,6 @@ export default function Home() {
   const scrollRef: MutableRefObject<HTMLDivElement | null> = useRef(null);
 
   useLayoutEffect(() => {
-    console.log(scrollRef.current?.scrollWidth);
     if (scrollRef && page == 0)
       scrollRef.current?.scrollTo({ left: 0, behavior: "smooth" });
     else if (scrollRef && page == 1)

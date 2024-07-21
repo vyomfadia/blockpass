@@ -10,7 +10,7 @@ export default function AccountSelector() {
             onChange={(event) => {
                 const accountIdx = accounts
                     ? accounts.findIndex(
-                        (account) => account.address === event.target.value.address
+                        (account) => account.address === (event.target.value as any).address
                     )
                     : 0;
                 setActingAccountIdx(accountIdx);

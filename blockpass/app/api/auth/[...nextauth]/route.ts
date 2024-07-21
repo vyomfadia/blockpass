@@ -77,7 +77,7 @@ const handler = NextAuth({
 
                         if (credentials?.address) {
                             const ksmAddress = encodeAddress(credentials.address, 2);
-                            const accountInfo = await api.query.system.account(ksmAddress);
+                            const accountInfo : any = await api.query.system.account(ksmAddress);
 
                             return {
                                 id: credentials.address,
