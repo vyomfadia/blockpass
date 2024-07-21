@@ -2,7 +2,14 @@
 
 import Image from "next/image";
 import { Event } from "../types";
-import { Dispatch, SetStateAction, useContext, useEffect, useRef, useState } from "react";
+import {
+  Dispatch,
+  SetStateAction,
+  useContext,
+  useEffect,
+  useRef,
+  useState,
+} from "react";
 import { useOnScreen } from "../(hooks)/IsOnScreen";
 
 export default function EventCard({
@@ -12,7 +19,7 @@ export default function EventCard({
 }: {
   className?: string;
   event: any;
-  setEvent: Dispatch<SetStateAction<Event | null>>
+  setEvent: Dispatch<SetStateAction<Event | null>>;
 }) {
   const ref = useRef(null);
   const [loaded, setLoaded] = useState(false);
@@ -23,7 +30,6 @@ export default function EventCard({
       setLoaded(true);
     }
   }, [isOnScreen, loaded]);
-
 
   return (
     <div
@@ -37,34 +43,35 @@ export default function EventCard({
         className={`relative w-full h-full left-0 bottom-0 duration-300 drop-shadow-none flex flex-col justify-between`}
       >
         <div className="overlay absolute w-full h-full overflow-hidden">
-          <svg height="100%" viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'>
-              <filter id='noiseFilter'>
-                  <feTurbulence 
-                  type='fractalNoise' 
-                  baseFrequency='9.11' 
-                  numOctaves='6' 
-                  stitchTiles='stitch'/>
-              </filter>
-              
-              <rect width='100%' height='100%' filter='url(#noiseFilter)'/>
-              </svg>
+          <svg
+            height="100%"
+            viewBox="0 0 400 400"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <filter id="noiseFilter">
+              <feTurbulence
+                type="fractalNoise"
+                baseFrequency="9.11"
+                numOctaves="6"
+                stitchTiles="stitch"
+              />
+            </filter>
+
+            <rect width="100%" height="100%" filter="url(#noiseFilter)" />
+          </svg>
         </div>
-        <div className="card-gradient h-full">
+        <div className="card-gradient h-full relative">
+            <Image
+              alt=""
+              width={300}
+              height={300}
+              src={event.eventThumbnail}
+              className="w-full object-cover h-full absolute opacity-[20%]"
+            />
           <div className="h-full flex flex-col p-4 justify-end">
-          <p className="mt-auto font-black text-3xl">
-            {event.name}
-          </p>
+            <p className="mt-auto font-black text-3xl z-20">{event.name}</p>
           </div>
-
         </div>
-        {/* <Image 
-          alt=""
-          width={300}
-          height={500}
-          src={event.thumbnail}
-          className=" object-fill h-[350px]"
-
-        /> */}
         {/* <p className={`font-normal text-[48px] text-foreground`}>
           {event.name}
         </p> */}
@@ -77,22 +84,23 @@ export default function EventCard({
               {event.location}
             </p>
             <p className="text-lg">
-            {new Date(Number(event.date)).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}
+              {new Date(Number(event.date)).toLocaleDateString("en-US", {
+                year: "numeric",
+                month: "long",
+                day: "numeric",
+              })}
             </p>
           </div>
 
           <div className="flex flex-col justify-end items-end gap-2">
-            <p className="font-bold text-sm">
-              Starting at
-            </p>
-            <p
-              className="text-lg"
-              suppressHydrationWarning
-            >
-              {new Date(Number(event.date)).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
+            <p className="font-bold text-sm">Starting at</p>
+            <p className="text-lg" suppressHydrationWarning>
+              {new Date(Number(event.date)).toLocaleTimeString([], {
+                hour: "2-digit",
+                minute: "2-digit",
+              })}
             </p>
           </div>
-
         </div>
       </div>
     </div>

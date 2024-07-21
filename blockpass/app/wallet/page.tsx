@@ -3,6 +3,8 @@
 import {useEffect, useLayoutEffect, useState} from "react";
 import {listAllEvents} from "@/app/(lib)/event_manager";
 import NavigationBar from "../(components)/NavigationBar";
+import {getTickets} from "@/app/(lib)/database/ticket_manager";
+import {ethers} from "ethers";
 
 function EventBox({event}) {
     return (
@@ -14,6 +16,17 @@ function EventBox({event}) {
 
 export default function Login() {
     const [events, setEvents] = useState([]);
+    const [tickets, setTickets] = useState([]);
+
+    useEffect(() => {
+        const provider = new ethers.BrowserProvider((window as any).ethereum);
+        void provider.getSigner().then((signer) => {
+            void getTickets(signer.address).then((tickets) => {
+                setTickets(tickets);
+                // tickets
+            });
+        });
+    }, []);
 
     return (
         <main className="py-7 h-full overflow-hidden">

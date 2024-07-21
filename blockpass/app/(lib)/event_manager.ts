@@ -5,7 +5,7 @@ import EventFactoryAbi from "@/app/(lib)/contracts/abi/creator.json";
 
 import {ethers} from "ethers";
 
-const eventCreatorContractAddress = "0x85b108660f47cadfab9e0503104c08c1c96e0da9"
+const eventCreatorContractAddress = "0x1ed864796640d30A36E3937089724C3EB62f85e5"
 
 export async function listAllEvents() {
     const provider = new ethers.BrowserProvider(window.ethereum);
@@ -25,7 +25,8 @@ export async function listAllEvents() {
         const remainingTickets = await eventContract.remainingTickets();
         const name = await eventContract.name();
         const symbol = await eventContract.symbol();
-        out.push({location, date, price, remainingTickets, name, symbol, contractId: events[i]});
+        const eventThumbnail = await eventContract.eventThumbnail();
+        out.push({location, date, price, remainingTickets, name, symbol, eventThumbnail, contractId: events[i]});
     }
 
     return out;

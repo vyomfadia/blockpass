@@ -8,8 +8,8 @@ import "@openzeppelin/contracts/access/Ownable.sol";
 contract EventFactory {
     Event[] public events;
 
-    function releaseNewEvent(uint64 _ticketCount, uint64 _pricing, uint64 _date, string memory _location, string memory _eventName, string memory _eventSymbol)  external returns (address newEvent) {
-        Event e = new Event(msg.sender, _ticketCount, _pricing, _date, _location, _eventName, _eventSymbol);
+    function releaseNewEvent(uint64 _ticketCount, uint64 _pricing, uint64 _date, string memory _location, string memory _eventThumbnail, string memory _eventName, string memory _eventSymbol)  external returns (address newEvent) {
+        Event e = new Event(msg.sender, _ticketCount, _pricing, _date, _location, _eventThumbnail, _eventName, _eventSymbol);
 
         events.push(e);
         return address(e);
@@ -47,7 +47,9 @@ contract Event is ERC721 {
 
     Ticket[] public tickets;
 
-    constructor(address _owner, uint _ticketCount, uint _price, uint64 _date, string memory _location, string memory _eventName, string memory _eventSymbol) ERC721(_eventName, _eventSymbol) {
+    event CreateTicket(address buyer, address eventId, uint ticketID);
+
+    constructor(address _owner, uint _ticketCount, uint _price, uint64 _date, string memory _location, string memory _eventThumbnail, string memory _eventName, string memory _eventSymbol) ERC721(_eventName, _eventSymbol) {
         bytes memory eventNameBytes = bytes(_eventName);
         bytes memory eventSymbolBytes = bytes(_eventSymbol);
         require(eventNameBytes.length != 0, "event name");
@@ -57,6 +59,7 @@ contract Event is ERC721 {
         date = _date;
         price = _price;
         remainingTickets = _ticketCount;
+        eventThumbnail = _eventThumbnail;
 
         owner = payable(_owner);
     }
@@ -74,6 +77,8 @@ contract Event is ERC721 {
         require(sent, "transaction failed");
 
         _safeMint(msg.sender, ticketID);
+        emit CreateTicket(msg.sender, address(this), ticketID);
+
         return ticketID;
     }
 
