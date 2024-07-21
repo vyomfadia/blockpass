@@ -204,10 +204,10 @@ export default function Home() {
                       await contract.on(
                         "CreateTicket",
                         (buyer, event, ticketId) => {
+                          console.log("CHEESE");
                           void insertTickets(buyer, event, ticketId);
                         }
                       );
-                      // await insertTickets(value.address, contractId, tokenId);
                     } catch (e) {
                       window.alert(e);
                     }
