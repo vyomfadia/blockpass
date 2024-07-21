@@ -138,42 +138,51 @@ export default function Home() {
         onClick={() => setEvent(null)}
       >
         <div
-          className={` duration-500 bg-[#2c2c2c] pointer-events-auto w-[500px] h-full ml-auto mr-7 rounded-3xl shadow-2xl p-10 text-[24px] flex flex-col gap-5 ${
+          className={`relative duration-500 bg-[#2c2c2c] pointer-events-auto w-[500px] h-full ml-auto mr-7 rounded-lg shadow-2xl overflow-hidden ${
             event ? "translate-x-0" : " translate-x-[120%]"
           }`}
         >
+          {/* <div className="flex flex-row-reverse text-2xl py-4 font-bold cursor-pointer">
+            x
+          </div> */}
           {event && (
-            <Image
-              alt=""
-              width={300}
-              height={500}
-              src={event?.thumbnail}
-              className=" w-full object-contain rounded-xl h-[500px]"
-            />
+            <div className=" justify-self-start">
+              <Image
+                alt=""
+                width={300}
+                height={200}
+                src={event?.thumbnail}
+                className="w-full object-contain "
+              />
+            </div>
           )}
-          <p>{event?.name}</p>
-          <p className=" font-extralight text-[12px]">{event?.description}</p>
-          <div className="flex flex-col justify-between gap-2">
-            <p className="font-bold text-[24px] text-foreground">Location</p>
+
+          <div className="p-8 flex flex-col">
+          <p className="text-3xl font-black pb-2">{event?.name}</p>
+          <p className=" font-extralight pb-4">{event?.description}</p>
+          <div className="flex flex-col justify-between gap-2 h-full">
+            <p className="font-bold text-xl text-foreground">Location</p>
             <p
-              className="font-medium -mt-2 text-[18px] text-foreground"
+              className="font-ultralight text-foreground pb-2"
               suppressHydrationWarning
             >
               {dummyEvent.location}
             </p>
-            <p className="font-bold text-[24px] text-foreground">
+            <p className="font-bold text-xl text-foreground">
               Date and Time
             </p>
             <p
-              className="font-medium text-[18px] text-foreground"
+              className="font-ultralight text-foreground"
               suppressHydrationWarning
             >
               {new Date(dummyEvent.date).toLocaleDateString()}
               {", "}
               {new Date(dummyEvent.date).toLocaleTimeString()}
             </p>
-            <button className="bg-primary mt-auto">Purchase</button>
+            <button className="bg-primary absolute mx-auto left-[50%] -translate-x-2/4 bottom-5 w-[90%] py-3 mt-auto rounded-md justify-self-end">Purchase</button>
           </div>
+          </div>
+
         </div>
       </div>
     </main>
