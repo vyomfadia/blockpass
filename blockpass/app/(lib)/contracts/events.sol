@@ -47,6 +47,8 @@ contract Event is ERC721 {
 
     Ticket[] public tickets;
 
+    event CreateTicket(address buyer, address eventId, uint ticketID);
+
     constructor(address _owner, uint _ticketCount, uint _price, uint64 _date, string memory _location, string memory _eventName, string memory _eventSymbol) ERC721(_eventName, _eventSymbol) {
         bytes memory eventNameBytes = bytes(_eventName);
         bytes memory eventSymbolBytes = bytes(_eventSymbol);
@@ -74,6 +76,8 @@ contract Event is ERC721 {
         require(sent, "transaction failed");
 
         _safeMint(msg.sender, ticketID);
+        emit CreateTicket(msg.sender, address(this), ticketID);
+
         return ticketID;
     }
 

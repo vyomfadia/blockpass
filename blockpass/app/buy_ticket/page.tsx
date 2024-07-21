@@ -5,6 +5,7 @@ import EventsAbi from "@/app/(lib)/contracts/abi/events.json";
 import {useEffect, useState} from "react";
 
 import { ethers } from 'ethers';
+import {insertTickets} from "@/app/(lib)/database/ticket_manager";
 
 export default function BuyTicket() {
     const [eventList, setEventList] = useState([]);
@@ -22,9 +23,11 @@ export default function BuyTicket() {
             const signer = await provider.getSigner();
             const contract = new ethers.Contract(contractId, EventsAbi, signer);
 
+            console.log("MONKEY");
             try {
                 const value = await contract.buyTicket({value: ethers.parseEther(price.toString())});
-                console.log(value.toString());
+                await contract.on("CreateTicket", (buyer, event, ticketId) => {void insertTickets(buyer, event, ticketId)});
+                // await insertTickets(value.address, contractId, tokenId);
             } catch (e) {
                 window.alert(e);
             }

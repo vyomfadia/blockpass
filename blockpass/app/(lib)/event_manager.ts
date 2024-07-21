@@ -5,7 +5,7 @@ import EventFactoryAbi from "@/app/(lib)/contracts/abi/creator.json";
 
 import {ethers} from "ethers";
 
-const eventCreatorContractAddress = "0x85b108660f47cadfab9e0503104c08c1c96e0da9"
+const eventCreatorContractAddress = "0xcd13A508cF33C8aB8920b74B7280829c86F42e5f"
 
 export async function listAllEvents() {
     const provider = new ethers.BrowserProvider(window.ethereum);
