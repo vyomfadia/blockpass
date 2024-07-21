@@ -15,7 +15,7 @@ type EventDetails = {
 }
 
 export async function listAllEvents() {
-    const web3 = new Web3("http://127.0.0.1:9944");
+    const web3 = new Web3("https://de2a-62-23-207-10.ngrok-free.app/");
     const contractRef = new web3.eth.Contract(EventFactoryAbi, eventCreatorContractAddress);
 
     const events = await contractRef.methods.listAllEvents().call();

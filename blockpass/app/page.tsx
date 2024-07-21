@@ -14,6 +14,8 @@ import {
   useRef,
   useState,
 } from "react";
+import { useSearchParams } from "next/navigation";
+import Link from "next/link";
 
 const dummyEvent: Event = {
   name: "Vyoms Mom",
@@ -26,28 +28,30 @@ const dummyEvent: Event = {
 };
 
 export default function Home() {
-  const [page, setPage] = useState(0);
+  // const [page, setPage] = useState(0);
+
+  const qp = useSearchParams();
+
   const [event, setEvent] = useState<Event | null>(null);
   const scrollRef: MutableRefObject<HTMLDivElement | null> = useRef(null);
 
   useLayoutEffect(() => {
-    if (scrollRef && page == 0)
+    if (scrollRef && !qp.has("discover"))
       scrollRef.current?.scrollTo({ left: 0, behavior: "smooth" });
-    else if (scrollRef && page == 1)
+    else if (scrollRef && qp.has("discover"))
       scrollRef.current?.scrollTo({
         left: scrollRef.current?.scrollWidth / 2,
         behavior: "smooth",
       });
-  }, [page, scrollRef]);
+  }, [scrollRef, qp]);
 
   return (
     <main className="py-7 h-full overflow-hidden">
-      <NavigationBar setPage={setPage} page={page} />
+      <NavigationBar />
       <div
         className="grid grid-cols-[100%_100%] overflow-hidden w-full h-full"
         ref={scrollRef}
       >
-
         {/* Landing */}
         <div className="h-full flex flex-col justify-end relative">
           <div className="absolute top-0 grid grid-cols-5 gap-8 overflow-hidden mt-5 h-full w-full">
@@ -58,41 +62,42 @@ export default function Home() {
             <div className="h-[160px] bg-primary" />
           </div>
 
-            <div className="pb-32">
+          <div className="pb-32">
             <div
-                className={`py-5 group ease-in-out w-[30%] hover:w-[40%] duration-[2000ms] ${
-                  page == 1 && " !w-[195%]"
-                }`}
-              >
-                <div className=" relative w-full h-[1px] bg-gray ">
-                  <div className="w-[20px] h-[20px] left-full absolute   rounded-full top-1/2  -translate-y-1/2   bg-gray" />
-                </div>
-              </div>
-
-              <div className="grid grid-cols-[60%_40%] max-w-[1200px] mx-auto items-center text-gray ">
-                {/* Hero Text */}
-                <div className="flex-col gap-4 flex">
-                  {/* Hero Title */}
-                  <h1 className="font-semibold text-5xl">
-                      Book tickets for your favourite artists with security
-                  </h1>
-                  {/* Subheading */}
-                  <p className="font-extralight w-[80%]">
-                    Bla bla bla subtext. Bla bla bla subtext. Bla bla bla subtext.
-                    Bla bla bla subtext. Bla bla bla subtext.{" "}
-                  </p>
-                </div>
-
-                {/* Next button */}
-                <div className="border border-gray rounded-full grid place-items-center w-60 aspect-square items-center group cursor-pointer hover:border-[#ffff] duration-200 ml-auto" onClick={()=>setPage(1)}>
-                  <DownChev className="h-16 rotate-[180deg] opacity-30 group-hover:opacity-100 duration-200 " />
-                </div>
-
+              className={`py-5 group ease-in-out w-[30%] hover:w-[40%] duration-[2000ms] ${
+                qp.has("discover") && " !w-[195%]"
+              }`}
+            >
+              <div className=" relative w-full h-[1px] bg-gray ">
+                <div className="w-[20px] h-[20px] left-full absolute   rounded-full top-1/2  -translate-y-1/2   bg-gray" />
               </div>
             </div>
+
+            <div className="grid grid-cols-[60%_40%] max-w-[1200px] mx-auto items-center text-gray ">
+              {/* Hero Text */}
+              <div className="flex-col gap-4 flex">
+                {/* Hero Title */}
+                <h1 className="font-semibold text-5xl">
+                  Book tickets for your favourite artists with security
+                </h1>
+                {/* Subheading */}
+                <p className="font-extralight w-[80%]">
+                  Bla bla bla subtext. Bla bla bla subtext. Bla bla bla subtext.
+                  Bla bla bla subtext. Bla bla bla subtext.{" "}
+                </p>
+              </div>
+
+              {/* Next button */}
+              <Link href="/?discover">
+                <div className="border border-gray rounded-full grid place-items-center w-60 aspect-square items-center group cursor-pointer hover:border-[#ffff] duration-200 ml-auto">
+                  <DownChev className="h-16 rotate-[180deg] opacity-30 group-hover:opacity-100 duration-200 " />
+                </div>
+              </Link>
+            </div>
+          </div>
         </div>
 
-      {/* events */}
+        {/* events */}
         <div>
           <h1 className="text-[12px] font-light mx-auto mb-2 -mt-5 text-center">
             Discover Events
@@ -126,13 +131,15 @@ export default function Home() {
             event ? "translate-x-0" : " translate-x-[120%]"
           }`}
         >
-          {event && <Image
-            alt=""
-            width={300}
-            height={500}
-            src={event?.thumbnail}
-            className=" w-full object-contain rounded-xl h-[500px]"
-          />}
+          {event && (
+            <Image
+              alt=""
+              width={300}
+              height={500}
+              src={event?.thumbnail}
+              className=" w-full object-contain rounded-xl h-[500px]"
+            />
+          )}
           <p>{event?.name}</p>
           <p className=" font-extralight text-[12px]">{event?.description}</p>
           <div className="flex flex-col justify-between gap-2">
@@ -150,7 +157,8 @@ export default function Home() {
               className="font-medium text-[18px] text-foreground"
               suppressHydrationWarning
             >
-              {new Date(dummyEvent.date).toLocaleDateString()}{", "}
+              {new Date(dummyEvent.date).toLocaleDateString()}
+              {", "}
               {new Date(dummyEvent.date).toLocaleTimeString()}
             </p>
             <button className="bg-primary mt-auto">Purchase</button>

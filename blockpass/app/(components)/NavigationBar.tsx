@@ -1,30 +1,53 @@
+"use client";
 import Link from "next/link";
-import { Dispatch, SetStateAction } from "react";
-import Logo from "@/public/logo.svg"
+import { Dispatch, SetStateAction, useEffect, useState } from "react";
+import Logo from "@/public/logo.svg";
 import Login from "../login/page";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import { useSession } from "next-auth/react";
 
-function NavigationBarButton({ text, onclick, page, cPage }: any) {
+function NavigationBarButton({ text, link }: any) {
+  const pathName = usePathname();
+  const qp = useSearchParams();
+  
+  const [isSet, setSet] = useState(
+    (link == pathName && !qp.has("discover")) ||
+    (link == "/?discover" && qp.has("discover"))
+  );
+  
+  useEffect(() => {
+    setSet(
+      (link == pathName && !qp.has("discover")) ||
+      (link == "/?discover" && qp.has("discover"))
+    );
+  }, [pathName, qp]);
+      
   return (
-    <div onClick={onclick} className={" cursor-pointer " + (cPage == page && " pointer-events-none") }>
-      <p className={"text-[18px] tracking-wide font-extralight uppercase hover:-translate-y-1 duration-200 opacity-70 hover:opacity-100 " + (cPage == page && " !opacity-100") }>
+    <Link href={link} className={" cursor-pointer "}>
+      <p
+        className={
+          "text-[18px] tracking-wide font-extralight  uppercase hover:-translate-y-1 duration-200 hover:opacity-100 " +
+          (isSet ? " opacity-100" : " opacity-70")
+        }
+        >
         {text}
       </p>
-    </div>
+    </Link>
   );
 }
 
-export default function NavigationBar({setPage, page}: {setPage: Dispatch<SetStateAction<number>>, page: number}) {
+export default function NavigationBar() {
+  const authSession = useSession();
+  
   return (
     <div className="flex justify-between w-full relative mx-auto pb-8 px-20 items-center ">
-      <NavigationBarButton text="Home" onclick={()=>{setPage(0)}} page={0} cPage={page}/>
-      <NavigationBarButton text="Discover" onclick={()=>{setPage(1)}} page={1} cPage={page}/>
+      <NavigationBarButton text="Home" link="/" />
+      <NavigationBarButton text="Discover" link="/?discover" />
       <div className="h-[80px]">
-        <Logo/>
+        <Logo />
       </div>
-      <Link href={"/login"}>
-      <NavigationBarButton text="Login" link="/" page={2} cPage={page}/>
-      </Link>
-      <NavigationBarButton text="Manage" link="/"  page={3} cPage={page}/>
+      <NavigationBarButton text={authSession.status == "authenticated" ? "Wallet" : "Login"} link="/login" />
+      <NavigationBarButton text="Manage" link="/dashboard" />
     </div>
   );
 }

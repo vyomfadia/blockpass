@@ -65,7 +65,7 @@ export default function LoginButton() {
     }
 
     return (
-        <div className={"flex justify-center items-center h-screen"}>
+        <div className={"flex justify-center items-center "}>
             <div
                 className="min-w-[30rem] p-4 border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
                 <form className="space-y-6" action="#">
