@@ -25,11 +25,12 @@ const QrReader = () => {
         if (!scannedResult)
             setValidTicket(false);
 
+        let cleanScannedResult = scannedResult;
         if (scannedResult.startsWith("http://")) {
-            setScannedResult(scannedResult.substring(7));
+            cleanScannedResult = scannedResult.substring(7);
         }
 
-        const parts = scannedResult.split(".");
+        const parts = cleanScannedResult.split(".");
         if (parts.length != 3) {
             setValidTicket(false);
             return;
@@ -45,9 +46,14 @@ const QrReader = () => {
         const test = async () => {
             const provider = new ethers.BrowserProvider((window as any).ethereum);
             const signer = await provider.getSigner();
-            const contract = new ethers.Contract(parts[0], EventsAbi, signer);
-            await contract.verifyTicket(BigInt(parts[1]));
-            setValidTicket(true);
+            try {
+                const contract = new ethers.Contract(parts[0], EventsAbi, signer);
+                await contract.verifyTicket(BigInt(parts[1]));
+                setValidTicket(true);
+            } catch (e) {
+                console.log(e);
+                setValidTicket(false);
+            }
         }
 
         void test()
