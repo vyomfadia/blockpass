@@ -85,7 +85,7 @@ export default function EventCard({
               {event.location}
             </p>
             <p className="text-lg">
-              {new Date(Number(event.date)).toLocaleDateString("en-US", {
+              {new Date(Number(event.date) * 1000).toLocaleDateString("en-US", {
                 year: "numeric",
                 month: "long",
                 day: "numeric",
